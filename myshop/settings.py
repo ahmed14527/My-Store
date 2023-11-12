@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'knox',
     'rest_framework',
     "accounts",
-   'drf_yasg',
+    'drf_yasg',
 
 
 
@@ -126,6 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -149,4 +150,3 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,  # If using token-based authentication
 }
 
-STATIC_URL = 'static/'  # Required for Swagger UI
