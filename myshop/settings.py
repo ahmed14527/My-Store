@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 
 
+
     
 ]
 
@@ -125,9 +126,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    # ...
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        # If your API requires authentication, provide the necessary configuration here
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'scheme': 'Bearer',
+            'in': 'header',
+        },
+    },
+    'USE_SESSION_AUTH': False,  # If using token-based authentication
+}
+
+STATIC_URL = '/static/'  # Required for Swagger UI

@@ -33,3 +33,14 @@ class OrderListAPIView(generics.ListAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     
+from rest_framework.decorators import api_view
+from drf_yasg.utils import swagger_auto_schema
+
+@api_view(['GET'])
+@swagger_auto_schema(
+    operation_description="Retrieve a list of users",
+    responses={200: 'List of users'},
+)
+def user_list(request):
+    # Your view code here
+    pass
