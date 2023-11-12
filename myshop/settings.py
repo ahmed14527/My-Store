@@ -149,4 +149,4 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,  # If using token-based authentication
 }
 
-STATIC_URL = '/static/'  # Required for Swagger UI
+STATIC_URL = 'static/'  # Required for Swagger UI
