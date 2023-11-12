@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from .serializers import UserSerializer, RegisterSerializer
 from django.contrib.auth import login
-from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,6 +10,15 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
+from rest_framework import generics
+from django.contrib.auth.models import User
+from .serializers import RegisterSerializer
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from django.http import HttpResponse
 # Register API
 
 
@@ -46,3 +54,22 @@ class LogoutView(APIView):
         logout(request)
 
         return Response({"details": "Successfully logged out"}, status=status.HTTP_200_OK)
+    
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    
+
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .serializers import UserSerializer
+
+@login_required
+def profile(request):
+    user = request.user
+    data = {
+        'id': user.id,
+        'username': user.username,
+        'email': user.email
+    }
+    return JsonResponse(data)
